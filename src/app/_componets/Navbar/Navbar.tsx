@@ -282,14 +282,13 @@ const Navbar = () => {
     { name: "Brands", href: "/Brands" },
   ];
 
-  // دالة موحدة للـ signout
-  const handleSignOut = async (e?: React.SyntheticEvent) => {
-    if (e) e.preventDefault();
-    console.log("SignOut pressed"); // مؤقت للتجربة
-    setIsOpen(false);
-    await new Promise((r) => setTimeout(r, 100)); // يسمح بإغلاق المينيو
-    await signOut({ callbackUrl: "/Signin" });
-  };
+
+const handleSignOut = async (e?: React.SyntheticEvent) => {
+  if (e) e.preventDefault();
+  setIsOpen(false);
+  await new Promise((r) => setTimeout(r, 100)); // يسمح بإغلاق المينيو
+  await signOut({ callbackUrl: "/Signin" });
+};
 
   return (
     <div className="navbar bg-white shadow-sm md:px-0  fixed  top-0 left-0 right-0 z-10">
@@ -350,12 +349,24 @@ const Navbar = () => {
         <div className=" xl:flex items-center gap-3">
           <div className="hidden xl:flex items-center gap-3">
             <ul className="flex items-center gap-2 ">
-              <li><i className="fa-brands fa-instagram cursor-pointer fa-lg "></i></li>
-              <li><i className="fa-brands fa-facebook cursor-pointer fa-lg"></i></li>
-              <li><i className="fa-brands fa-tiktok cursor-pointer fa-lg"></i></li>
-              <li><i className="fa-brands fa-twitter cursor-pointer fa-lg"></i></li>
-              <li><i className="fa-brands fa-linkedin cursor-pointer fa-lg"></i></li>
-              <li><i className="fa-brands fa-youtube cursor-pointer fa-lg"></i></li>
+              <li>
+                <i className="fa-brands fa-instagram cursor-pointer fa-lg "></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-facebook cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-tiktok cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-twitter cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-linkedin cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-youtube cursor-pointer fa-lg"></i>
+              </li>
             </ul>
           </div>
 
@@ -392,8 +403,18 @@ const Navbar = () => {
             )}
             {status === "unauthenticated" && (
               <>
-                <Link href="/Register" className="md:text-lg text-gray-500 hover:text-black font-semibold">Register</Link>
-                <Link href="/Signin" className="md:text-lg text-gray-500 hover:text-black font-semibold">Signin</Link>
+                <Link
+                  href="/Register"
+                  className="md:text-lg text-gray-500 hover:text-black font-semibold"
+                >
+                  Register
+                </Link>
+                <Link
+                  href="/Signin"
+                  className="md:text-lg text-gray-500 hover:text-black font-semibold"
+                >
+                  Signin
+                </Link>
               </>
             )}
           </div>
@@ -405,7 +426,11 @@ const Navbar = () => {
         className={`
           absolute top-16 left-0 w-full bg-white shadow-lg p-4 xl:hidden z-50
           transition-all duration-500 ease-in-out
-          ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10 pointer-events-none"}
+          ${
+            isOpen
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-10 pointer-events-none"
+          }
         `}
       >
         <ul className="flex flex-col gap-4">
@@ -422,17 +447,35 @@ const Navbar = () => {
 
           <div className="mx-auto py-3">
             <ul className="flex items-center gap-2">
-              <li><i className="fa-brands fa-instagram cursor-pointer fa-lg"></i></li>
-              <li><i className="fa-brands fa-facebook cursor-pointer fa-lg"></i></li>
-              <li><i className="fa-brands fa-tiktok cursor-pointer fa-lg"></i></li>
-              <li><i className="fa-brands fa-twitter cursor-pointer fa-lg"></i></li>
-              <li><i className="fa-brands fa-linkedin cursor-pointer fa-lg"></i></li>
-              <li><i className="fa-brands fa-youtube cursor-pointer fa-lg"></i></li>
+              <li>
+                <i className="fa-brands fa-instagram cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-facebook cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-tiktok cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-twitter cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-linkedin cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-youtube cursor-pointer fa-lg"></i>
+              </li>
             </ul>
           </div>
 
           <li className="mx-auto">
-            <Link href="/Cart" onClick={() => setIsOpen(false)}>
+            <Link
+              href="/Cart"
+              onClick={() => {
+                setIsOpen(false);
+                window.location.href = "/Cart"; // أو router.push("/Cart")
+              }}
+            >
               <button className="cursor-pointer">
                 <i className="fa-solid fa-cart-shopping text-2xl text-gray-600 hover:text-black transition-all duration-300 relative">
                   <Badge className="absolute -top-4 left-4 bg-[#4FA74F]">
@@ -446,8 +489,7 @@ const Navbar = () => {
           <li className="mx-auto">
             <button
               type="button"
-              onClick={handleSignOut}
-              onTouchStart={handleSignOut}
+              onClick={handleSignOut} // 👈 من غير onTouchStart
               className="xl:flex md:text-lg text-gray-500 hover:text-black active:text-black cursor-pointer font-semibold"
             >
               SignOut
@@ -460,4 +502,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

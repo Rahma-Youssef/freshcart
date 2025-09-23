@@ -36,7 +36,7 @@ const MainSlider = () => {
             delay: 3000,
             disableOnInteraction: false,
           }}
-          className=" overflow-hidden "
+          className=" overflow-hidden  mySwiper"
         >
           {slides.map((img, index) => (
             <SwiperSlide key={index}>
