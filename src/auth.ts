@@ -2,7 +2,6 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { jwtDecode } from "jwt-decode";
 
-
 export const authOption: NextAuthOptions = {
   pages: {
     signIn: "/Signin",
@@ -16,18 +15,20 @@ export const authOption: NextAuthOptions = {
         password: { label: "Password", type: "password" },
       },
 
-
       authorize: async (credentials) => {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/signin`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: credentials?.email,
-            password: credentials?.password,
-          }),
-        });
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/auth/signin`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: credentials?.email,
+              password: credentials?.password,
+            }),
+          }
+        );
 
         const data = await response.json();
 
@@ -48,15 +49,16 @@ export const authOption: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.user = user?.user;
-        token.token = user?.token;
+        token.user = user.user;
+        token.token = user.token;
       }
       return token;
     },
-    
+
     async session({ session, token }) {
       if (token) {
-        session.user = token?.user;
+        session.user = token.user;
+        session.token = token.token;
       }
 
       return session;
