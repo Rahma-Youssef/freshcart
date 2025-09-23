@@ -9,7 +9,7 @@ export async function getUserWishListAction() {
 
   if (!token) throw new Error("User not logged in");
 
-  const response = await fetch("https://ecommerce.routemisr.com/api/v1/wishlist", {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wishlist`, {
     headers: {
       token: token as string,
     },

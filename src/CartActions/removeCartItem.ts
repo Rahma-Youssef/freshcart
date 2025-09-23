@@ -9,7 +9,7 @@ export async function removeCartItemAction(id: string) {
   if (!token) throw new Error("User not logged in");
 
   const response = await fetch(
-    `https://ecommerce.routemisr.com/api/v1/cart/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/cart/${id}`,
     {
       method: "DELETE",
       headers: {

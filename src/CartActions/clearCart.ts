@@ -8,7 +8,7 @@ export async function clearCartAction(id: string) {
 
   if (!token) throw new Error("User not logged in");
 
-  const response = await fetch(`https://ecommerce.routemisr.com/api/v1/cart`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/cart`, {
     method: "DELETE",
     headers: {
       token: token as string,

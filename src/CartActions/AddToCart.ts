@@ -14,7 +14,7 @@ export async function AddToCartAction(id: string) {
   };
   
   const response  = await fetch(
-    "https://ecommerce.routemisr.com/api/v1/cart",
+  `${process.env.NEXT_PUBLIC_API_URL}/cart`,
     {
       method: "POST",
       headers: {

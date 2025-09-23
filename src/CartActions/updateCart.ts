@@ -10,7 +10,7 @@ export async function updateCartAction(id: string, count: number) {
   const values = { count };
 
   const response = await fetch(
-    `https://ecommerce.routemisr.com/api/v1/cart/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/cart/${id}`,
     {
       method: "PUT",
       headers: {

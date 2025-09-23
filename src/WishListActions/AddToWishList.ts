@@ -13,7 +13,7 @@ export async function AddToWishListAction(id: string) {
   };
 
   const response = await fetch(
-    "https://ecommerce.routemisr.com/api/v1/wishlist",
+    `${process.env.NEXT_PUBLIC_API_URL}/wishlist`,
     {
 
       method: "POST",
