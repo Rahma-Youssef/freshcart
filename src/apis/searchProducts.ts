@@ -2,7 +2,7 @@ import { Product } from "@/Types/Product.type";
 
 export async function searchProducts(keyword: string) {
   const response = await fetch(
-    `https://ecommerce.routemisr.com/api/v1/products?keyword=${keyword}`
+    `${process.env.NEXT_PUBLIC_API_URL}/products?keyword=${keyword}`
   );
 
   if (!response.ok) throw new Error("Failed to fetch products");

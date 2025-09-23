@@ -9,7 +9,7 @@ export async function removeWishlistItemAction(id: string) {
   if (!token) throw new Error("User not logged in");
 
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}wishlist/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/wishlist/${id}`,
     {
       method: "DELETE",
       headers: {

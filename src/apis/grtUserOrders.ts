@@ -9,7 +9,7 @@ export async function getUserOrders() {
   if (!token) throw new Error("User not logged in");
 
   const response = await fetch(
-    `https://ecommerce.routemisr.com/api/v1/orders/user/${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/orders/user/${id}`,
     {
       method: "GET",
       headers: {

@@ -22,7 +22,7 @@ export async function updateCartAction(id: string, count: number) {
   );
 
   if (!response.ok) {
-    // ممكن تطلعي رسالة السيرفر بدل ما تعملي Error عام
+ 
     const errorBody = await response.json().catch(() => null);
     throw new Error(
       errorBody?.message || `Failed to update cart: ${response.statusText}`
