@@ -12,7 +12,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { registerSchema, RegisterSchemaType } from "@/schema/register.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useForm } from "react-hook-form";
