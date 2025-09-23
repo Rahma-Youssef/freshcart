@@ -42,14 +42,15 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/">
-         
               {status === "loading" ? (
                 <Skeleton className="h-[40px] w-[90px] rounded-md bg-gray-300" />
-              ):   <Image
+              ) : (
+                <Image
                   src={navbarLogo}
                   alt="Logo-Navbar"
                   className=" cursor-pointer w-35  md:w-full"
-                />}
+                />
+              )}
             </Link>
 
             <div className="hidden xl:flex">
@@ -77,8 +78,6 @@ const Navbar = () => {
                     ))}
                   </>
                 )}
-
-         
               </ul>
             </div>
           </div>
@@ -163,16 +162,13 @@ const Navbar = () => {
             )}
             {status === "unauthenticated" && (
               <>
-       
-                  <button className="md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold">
+                <button className="md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold">
                   <Link href="/Register">Register</Link>
                 </button>
                 <button className="md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold">
-                 <Link href="/Signin"> Signin</Link>
+                  <Link href="/Signin"> Signin</Link>
                 </button>
-          
-          
-                 </>
+              </>
             )}
           </div>
         </div>
@@ -180,58 +176,78 @@ const Navbar = () => {
 
       {/* Mobile Dropdown Menu */}
 
-      
-<div
-  className={`
+      <div
+        className={`
     absolute top-16 left-0 w-full bg-white shadow-lg p-4 xl:hidden z-50
     transition-all duration-500 ease-in-out
-    ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10 pointer-events-none"}
+    ${
+      isOpen
+        ? "opacity-100 translate-y-0"
+        : "opacity-0 -translate-y-10 pointer-events-none"
+    }
   `}
->
-  <ul className="flex flex-col gap-4">
-    {path.map((item, index) => (
-      <li key={index}>
-        <NavLink
-          hrefPath={item.href}
-          setIsOpen={setIsOpen}
-          name={item.name}
-          pathname={pathname}
-        />
-      </li>
-    ))}
+      >
+        <ul className="flex flex-col gap-4">
+          {path.map((item, index) => (
+            <li key={index}>
+              <NavLink
+                hrefPath={item.href}
+                setIsOpen={setIsOpen}
+                name={item.name}
+                pathname={pathname}
+              />
+            </li>
+          ))}
 
-    <div className="mx-auto py-3">
-      <ul className="flex items-center gap-2">
-        <li><i className="fa-brands fa-instagram cursor-pointer fa-lg"></i></li>
-        <li><i className="fa-brands fa-facebook cursor-pointer fa-lg"></i></li>
-        <li><i className="fa-brands fa-tiktok cursor-pointer fa-lg"></i></li>
-        <li><i className="fa-brands fa-twitter cursor-pointer fa-lg"></i></li>
-        <li><i className="fa-brands fa-linkedin cursor-pointer fa-lg"></i></li>
-        <li><i className="fa-brands fa-youtube cursor-pointer fa-lg"></i></li>
-      </ul>
-    </div>
+          <div className="mx-auto py-3">
+            <ul className="flex items-center gap-2">
+              <li>
+                <i className="fa-brands fa-instagram cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-facebook cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-tiktok cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-twitter cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-linkedin cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-youtube cursor-pointer fa-lg"></i>
+              </li>
+            </ul>
+          </div>
 
-    <li className="mx-auto">
-         <Link href="/Cart">
-                <button className="cursor-pointer">
-                  <i className="fa-solid fa-cart-shopping text-2xl text-gray-600  hover:text-black transition-all duration-300 relative">
-                    <Badge className="absolute -top-4 left-4 bg-[#4FA74F]">
-                      <div className="text-[14px]">{numOfCartItems}</div>
-                    </Badge>
-                  </i>
-                </button>
-              </Link>
-    </li>
+          <li className="mx-auto">
+            <Link href="/Cart">
+              <button className="cursor-pointer">
+                <i className="fa-solid fa-cart-shopping text-2xl text-gray-600  hover:text-black transition-all duration-300 relative">
+                  <Badge className="absolute -top-4 left-4 bg-[#4FA74F]">
+                    <div className="text-[14px]">{numOfCartItems}</div>
+                  </Badge>
+                </i>
+              </button>
+            </Link>
+          </li>
 
-    <li className="mx-auto">
-      <button className="text-lg text-gray-500 cursor-pointer hover:text-black font-semibold">
-        SignOut
-      </button>
-    </li>
-  </ul>
-</div>
-
-
+          <li className="mx-auto">
+            <button
+              className="hidden xl:flex md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold"
+              onClick={() =>
+                signOut({
+                  callbackUrl: "/Signin",
+                })
+              }
+            >
+              SignOut
+            </button>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };

@@ -36,7 +36,7 @@ async function handleSignin(values: SigninSchemaType) {
   const res = await signIn("credentials", {
     email: values.email,
     password: values.password,
-    redirect: false, // 👈 خليه false علشان نتحكم في التنقل
+    redirect: false,
     callbackUrl: "/", 
   });
   setLoading(false);
@@ -44,7 +44,7 @@ async function handleSignin(values: SigninSchemaType) {
   if (res?.ok) {
     toast.success("Signin successfully", { position: "top-center" });
     router.push(res.url || "/"); 
-    router.refresh(); // 👈 ده بيجبر الصفحة تعيد تحميل الـ session
+    router.refresh(); 
   } else {
     toast.error(res?.error || "Failed to sign in", {
       position: "top-center",
