@@ -13,18 +13,19 @@ import TitlePage from "../_componets/TitlePage/TitlePage";
 
 const Payment = () => {
   const { cartId, afterPayment } = useContext(CartContext);
-
   const router = useRouter();
-  const details = useRef("");
-  const phone = useRef("");
-  const city = useRef("");
+
+
+  const details = useRef<HTMLInputElement>(null);
+  const phone = useRef<HTMLInputElement>(null);
+  const city = useRef<HTMLInputElement>(null);
 
   async function cashPayment() {
     const values = {
       shippingAddress: {
-        details: details.current?.value,
-        phone: phone.current?.value,
-        city: city.current?.value,
+        details: details.current?.value || "",
+        phone: phone.current?.value || "",
+        city: city.current?.value || "",
       },
     };
 
@@ -40,19 +41,16 @@ const Payment = () => {
         afterPayment();
       }
     } catch (error) {
-      console.log(error);
+      return error;
     }
   }
 
   async function onlinePayment() {
-
-
-
     const values = {
       shippingAddress: {
-        details: details.current?.value,
-        phone: phone.current?.value,
-        city: city.current?.value,
+        details: details.current?.value || "",
+        phone: phone.current?.value || "",
+        city: city.current?.value || "",
       },
     };
 
@@ -71,54 +69,44 @@ const Payment = () => {
   }
 
   return (
-<>
-  <TitlePage title="Payment" />
-  <div className="w-full md:w-1/2 mx-auto px-4 py-10 mt-30">
-      <h1 className="text-4xl font-bold mb-6 text-center"> Payment</h1>
+    <>
+      <TitlePage title="Payment" />
+      <div className="w-full md:w-1/2 mx-auto px-4 py-10 mt-30">
+        <h1 className="text-4xl font-bold mb-6 text-center"> Payment</h1>
 
-      <div className="bg-white shadow-lg border border-gray-200 rounded-2xl p-6 space-y-4">
-        <div className="grid w-full items-center gap-3">
-          <Label htmlFor="details">Details</Label>
-          <Input
-            type="tel"
-            ref={details}
-            id="details"
-            placeholder="Details..."
-          />
-        </div>
+        <div className="bg-white shadow-lg border border-gray-200 rounded-2xl p-6 space-y-4">
+          <div className="grid w-full items-center gap-3">
+            <Label htmlFor="details">Details</Label>
+            <Input type="text" ref={details} id="details" placeholder="Details..." />
+          </div>
 
-        <div className="grid w-full  items-center gap-3">
-          <Label htmlFor="phone">Phone</Label>
-          <Input
-            type="text"
-            ref={phone}
-            id="phone"
-            placeholder="Phone..."
-            className="w-full"
-          />
-        </div>
+          <div className="grid w-full items-center gap-3">
+            <Label htmlFor="phone">Phone</Label>
+            <Input type="tel" ref={phone} id="phone" placeholder="Phone..." />
+          </div>
 
-        <div className="grid w-full  items-center gap-3">
-          <Label htmlFor="city">City</Label>
-          <Input type="text" ref={city} id="city" placeholder="City..." />
-        </div>
+          <div className="grid w-full items-center gap-3">
+            <Label htmlFor="city">City</Label>
+            <Input type="text" ref={city} id="city" placeholder="City..." />
+          </div>
 
-        <div>
-          <Button
-            onClick={cashPayment}
-            className="bg-amber-300 text-black hover:bg-amber-300   hover:scale-90 hover:text-black transation-all duration-300 cursor-pointer"
-          >
-            Cash Payment
-          </Button>
-          <Button
-            onClick={onlinePayment}
-            className="ms-5 bg-green-700 hover:bg-green-700  hover:scale-90 hover:text-white transation-all duration-300 cursor-pointer"
-          >
-            Online Payment
-          </Button>
+          <div>
+            <Button
+              onClick={cashPayment}
+              className="bg-amber-300 text-black hover:bg-amber-300 hover:scale-90 hover:text-black transition-all duration-300 cursor-pointer"
+            >
+              Cash Payment
+            </Button>
+            <Button
+              onClick={onlinePayment}
+              className="ms-5 bg-green-700 hover:bg-green-700 hover:scale-90 hover:text-white transition-all duration-300 cursor-pointer"
+            >
+              Online Payment
+            </Button>
+          </div>
         </div>
       </div>
-    </div></>
+    </>
   );
 };
 

@@ -22,56 +22,60 @@ export default function ResetPasswordPage() {
       });
       setMessage("✅ Password reset successfully! You can now log in.");
       router.push("/Signin");
-    } catch (err: any) {
-      setMessage("❌ " + err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setMessage("❌" + err.message);
+      } else {
+        setMessage("❌ An unexpected error occurred");
+      }
     }
   }
 
   return (
-  <>
-   <TitlePage title="Reset Password" />
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
-      <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
-        <h1 className="mb-6 text-center text-2xl font-bold text-gray-800">
-          Reset Password
-        </h1>
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <input
-            type="email"
-            placeholder="Enter your email again"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-
-          <input
-            type="password"
-            placeholder="New password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-
-          <button
-            type="submit"
-            className="w-full rounded-lg bg-blue-600 py-2 font-semibold text-white  hover:bg-blue-700 hover:scale-95 transition-all duration-200"
-          >
+    <>
+      <TitlePage title="Reset Password" />
+      <div className="flex min-h-screen items-center justify-center bg-gray-100 px-4">
+        <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-lg">
+          <h1 className="mb-6 text-center text-2xl font-bold text-gray-800">
             Reset Password
-          </button>
+          </h1>
 
-          {message && (
-            <p
-              className={`text-center text-sm font-medium ${
-                message.startsWith("✅") ? "text-green-600" : "text-red-600"
-              }`}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <input
+              type="email"
+              placeholder="Enter your email again"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+
+            <input
+              type="password"
+              placeholder="New password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-700 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+
+            <button
+              type="submit"
+              className="w-full rounded-lg bg-blue-600 py-2 font-semibold text-white  hover:bg-blue-700 hover:scale-95 transition-all duration-200"
             >
-              {message}
-            </p>
-          )}
-        </form>
+              Reset Password
+            </button>
+
+            {message && (
+              <p
+                className={`text-center text-sm font-medium ${
+                  message.startsWith("✅") ? "text-green-600" : "text-red-600"
+                }`}
+              >
+                {message}
+              </p>
+            )}
+          </form>
+        </div>
       </div>
-    </div>
-  </>
+    </>
   );
 }

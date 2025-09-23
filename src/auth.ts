@@ -1,7 +1,7 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { jwtDecode } from "jwt-decode";
-import { pages } from "next/dist/build/templates/app-page";
+
 
 export const authOption: NextAuthOptions = {
   pages: {
