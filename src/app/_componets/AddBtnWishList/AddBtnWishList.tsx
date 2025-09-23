@@ -29,8 +29,8 @@ const AddBtnWishList = ({ id }: { id: string }) => {
         });
       }
     } catch (error) {
-      console.error("Error:", error);
-      toast.error("حصل خطأ", { duration: 3000, position: "top-center" });
+
+      toast.error("Something went wrong", { duration: 3000, position: "top-center" });
     } finally {
       setIsLoading(false);
     }

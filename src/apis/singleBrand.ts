@@ -1,8 +1,6 @@
 import { Brand } from "@/Types/Product.type";
 
 
-
-
 export default async function getSingleBrands(id: string) {
 
   const response = await fetch(

@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { onlinePaymentAction } from "@/PaymentActions/onlinePayment";
 import TitlePage from "../_componets/TitlePage/TitlePage";
 
-const payment = () => {
+const Payment = () => {
   const { cartId, afterPayment } = useContext(CartContext);
 
   const router = useRouter();
@@ -122,4 +122,4 @@ const payment = () => {
   );
 };
 
-export default payment;
+export default Payment;

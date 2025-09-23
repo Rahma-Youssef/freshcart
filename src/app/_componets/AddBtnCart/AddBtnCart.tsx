@@ -12,7 +12,7 @@ export function useAddToCart() {
   const { addProductToCart } = useContext(CartContext);
 
   const handleAddToCart = async (id: string) => {
-    setLoadingIds((prev) => [...prev, id]); // المنتج ده في حالة loading
+    setLoadingIds((prev) => [...prev, id]); 
 
     try {
       const data: ProductCart = await addProductToCart(id);
@@ -34,11 +34,11 @@ export function useAddToCart() {
         position: "top-center",
       });
     } finally {
-      setLoadingIds((prev) => prev.filter((pid) => pid !== id)); // شيل المنتج من loading
+      setLoadingIds((prev) => prev.filter((pid) => pid !== id)); 
     }
   };
 
-  // helper: يشيك إذا المنتج ده في حالة loading ولا لأ
+
   const isLoading = (id: string) => loadingIds.includes(id);
 
   return { handleAddToCart, isLoading };

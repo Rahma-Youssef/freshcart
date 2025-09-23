@@ -17,16 +17,16 @@ export default function ForgotPassword() {
     setLoading(true);
     setInfo("");
     try {
-      // غيّر المسار إذا عندك مسار مختلف
+ 
       await apiFetch("/auth/forgotPasswords", {
         method: "POST",
         body: JSON.stringify({ email }),
       });
-      // رسالة عامة — لا تفصح إن الإيميل غير موجود
+ 
       setInfo("send");
       router.push("/verifyCode")
-    } catch (err: any) {
-      setInfo(err.message || " Try again");
+    } catch (erorr:unknown) {
+      setInfo(error.message || " Try again");
     } finally {
       setLoading(false);
     }

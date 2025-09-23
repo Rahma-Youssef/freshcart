@@ -3,17 +3,20 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import getAllCategories from "@/apis/allCategories";
 import getSubCategories from "@/apis/subCategories";
+import { Category } from "@/Types/wishList.type";
+import { Subcategory } from "@/Types/cart.type";
+
 
 export default function CategoriesComp() {
-  const [categories, setCategories] = useState<any[]>([]);
-  const [subCategories, setSubCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeCategoryName, setActiveCategoryName] = useState<string>("");
   const subCategoriesRef = useRef(null);
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const data = await getAllCategories();
+      const data: Category[] = await getAllCategories();
       setCategories(data);
     };
 
@@ -26,10 +29,13 @@ export default function CategoriesComp() {
 
     setActiveCategoryName(categoryName);
 
-    const data = await getSubCategories(categoryId);
+    const data: Subcategory[] = await getSubCategories(categoryId);
+    
     setTimeout(() => {
+
       subCategoriesRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 100);
+
 
     setSubCategories(data);
   };

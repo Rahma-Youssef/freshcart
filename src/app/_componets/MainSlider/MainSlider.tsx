@@ -94,7 +94,7 @@ import slider3 from "../../../../public/assets/slider/slider-image-3.webp";
 import "swiper/css";
 import "swiper/css/pagination";
 
-// dynamic import للـ Swiper بس
+
 const Swiper = dynamic(() => import("swiper/react").then(mod => mod.Swiper), {
   ssr: false,
 });
@@ -110,7 +110,7 @@ const MainSlider = () => {
           modules={[Autoplay, Pagination]}
           spaceBetween={0}
           slidesPerView={1}
-          loop={slides.length > 1} // loop يشتغل بس لو فيه اكتر من slide
+          loop={slides.length > 1} 
           pagination={{ clickable: true }}
           autoplay={{
             delay: 3000,

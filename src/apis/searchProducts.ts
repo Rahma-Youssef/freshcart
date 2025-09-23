@@ -7,7 +7,7 @@ export async function searchProducts(keyword: string) {
 
   if (!response.ok) throw new Error("Failed to fetch products");
 
-  const { data }: { data: Product[] } = await response.json(); // Array صح
+  const { data }: { data: Product[] } = await response.json(); 
 
-  return data; // دلوقتي هيرجع array من المنتجات
+  return data; 
 }

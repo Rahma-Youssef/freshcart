@@ -4,7 +4,7 @@
 import { useEffect } from "react";
 
 interface TitlePageProps {
-  title: string; // العنوان اللي عايزة تحطيه
+  title: string; 
 }
 
 const TitlePage = ({ title }: TitlePageProps) => {
