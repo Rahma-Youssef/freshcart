@@ -282,13 +282,12 @@ const Navbar = () => {
     { name: "Brands", href: "/Brands" },
   ];
 
-
-const handleSignOut = async (e?: React.SyntheticEvent) => {
-  if (e) e.preventDefault();
-  setIsOpen(false);
-  await new Promise((r) => setTimeout(r, 100)); // يسمح بإغلاق المينيو
-  await signOut({ callbackUrl: "/Signin" });
-};
+  const handleSignOut = async (e?: React.SyntheticEvent) => {
+    if (e) e.preventDefault();
+    setIsOpen(false);
+    await new Promise((r) => setTimeout(r, 100)); // يسمح بإغلاق المينيو
+    await signOut({ callbackUrl: "/Signin" });
+  };
 
   return (
     <div className="navbar bg-white shadow-sm md:px-0  fixed  top-0 left-0 right-0 z-10">
@@ -489,8 +488,16 @@ const handleSignOut = async (e?: React.SyntheticEvent) => {
           <li className="mx-auto">
             <button
               type="button"
-              onClick={handleSignOut} // 👈 من غير onTouchStart
-              className="xl:flex md:text-lg text-gray-500 hover:text-black active:text-black cursor-pointer font-semibold"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsOpen(false);
+
+                
+                setTimeout(() => {
+                  signOut({ callbackUrl: "/Signin" });
+                }, 100);
+              }}
+              className="md:text-lg text-gray-500 hover:text-black active:text-black cursor-pointer font-semibold"
             >
               SignOut
             </button>
