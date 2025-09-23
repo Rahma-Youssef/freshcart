@@ -31,25 +31,27 @@ const Signin = () => {
     resolver: zodResolver(signinSchema),
   });
 
- async function handleSignin(values: SigninSchemaType) {
+async function handleSignin(values: SigninSchemaType) {
   setLoading(true);
   const res = await signIn("credentials", {
     email: values.email,
     password: values.password,
-    redirect: true,
+    redirect: false, // 👈 خليه false علشان نتحكم في التنقل
     callbackUrl: "/", 
   });
   setLoading(false);
 
-
-  if (!res?.ok) {
+  if (res?.ok) {
+    toast.success("Signin successfully", { position: "top-center" });
+    router.push(res.url || "/"); 
+    router.refresh(); // 👈 ده بيجبر الصفحة تعيد تحميل الـ session
+  } else {
     toast.error(res?.error || "Failed to sign in", {
       position: "top-center",
       icon: <XCircle className="text-red-500" />,
     });
   }
 }
-
   return (
     <>
       <TitlePage title="Signin" />
