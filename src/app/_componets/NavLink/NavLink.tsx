@@ -15,8 +15,8 @@ const NavLink = ({ hrefPath, setIsOpen, name, pathname }: NavLinkProps) => {
       <Link
         href={hrefPath}
         className={`${
-          pathname === hrefPath ? "text-black font-semibold" : "text-gray-700"
-        }  hover:text-green-600`}
+          pathname === hrefPath ? "text-green-600 font-semibold" : "text-gray-700"
+        }  hover:text-green-600 active:text-green-600`}
         onClick={() => setIsOpen(false)}
       >
         {name}
@@ -38,7 +38,7 @@ const LinksNavbar = ({
     <>
       <Link
         href={href}
-        className={` hover:text-green-600
+        className={` hover:text-green-600 active:text-green-600
         ${pathname === href ? "text-green-600 font-semibold" : "text-gray-700 font-[500]"} 
            `}
       >

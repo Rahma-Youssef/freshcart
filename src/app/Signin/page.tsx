@@ -31,26 +31,24 @@ const Signin = () => {
     resolver: zodResolver(signinSchema),
   });
 
-  async function handleSignin(values: SigninSchemaType) {
-    setLoading(true);
-    const res = await signIn("credentials", {
-      email: values.email,
-      password: values.password,
-      redirect:false,
-      callbackUrl: "/",
-    });
-    setLoading(false);
+ async function handleSignin(values: SigninSchemaType) {
+  setLoading(true);
+  const res = await signIn("credentials", {
+    email: values.email,
+    password: values.password,
+    redirect: true,
+    callbackUrl: "/", 
+  });
+  setLoading(false);
 
-    if (res?.ok) {
-      toast.success("Signin successfully", { position: "top-center" });
-      router.push(res.url || "/");
-    } else {
-      toast.error(res?.error, {
-        position: "top-center",
-        icon: <XCircle className="text-red-500" />,
-      });
-    }
+
+  if (!res?.ok) {
+    toast.error(res?.error || "Failed to sign in", {
+      position: "top-center",
+      icon: <XCircle className="text-red-500" />,
+    });
   }
+}
 
   return (
     <>

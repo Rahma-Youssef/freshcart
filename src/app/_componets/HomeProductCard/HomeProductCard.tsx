@@ -13,7 +13,7 @@ const HomeProductCard = ({ product }: { product: Product }) => {
   return (
     <>
       <div className="inner" key={product.id}>
-        <div className="card  shadow-sm  group   hover:shadow-[0_0_10px_#6BAF6B] transition-all duration-500 delay-100 cursor-pointer">
+        <div className="card  shadow-sm  group   hover:shadow-[0_0_10px_#6BAF6B]  active:shadow-[0_0_10px_#6BAF6B] transition-all duration-500 delay-100 cursor-pointer">
           <Link href={`/ProductDetails/${product.id}`}>
             <figure>
               <Image
@@ -51,9 +51,10 @@ const HomeProductCard = ({ product }: { product: Product }) => {
               disabled={loading}
               onClick={() => handleAddToCart(product.id)}
               className="border-0 bg-[#64a164] hover:bg-[#2f6f2f] cursor-pointer w-[90%] mx-auto rounded-md mt-3 
-             translate-y-32 group-hover:-translate-y-5 
-             opacity-0 group-hover:opacity-100 
-             transition-all duration-500 "
+             md:translate-y-32 md:group-hover:-translate-y-5 
+             md:opacity-0 md:group-hover:opacity-100 
+             transition-all duration-500 
+               -translate-y-3  "
             >
               {loading ? "Adding..." : "Add to Cart"}
             </Button>
