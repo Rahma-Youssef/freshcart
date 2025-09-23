@@ -153,7 +153,7 @@ const Navbar = () => {
                   </button>
 
                   <div>
-                    <p className="hidden xl:flex bg-amber-300 text-[14px] p-2 rounded-md font-semibold flex gap-1">
+                    <p className="hidden xl:flex bg-amber-300 text-[14px] p-2 rounded-md font-semibold  gap-1">
                       <span>Welcome,</span> {session?.user?.name.split(" ")[0]}
                     </p>
                   </div>
@@ -236,12 +236,12 @@ const Navbar = () => {
 
           <li className="mx-auto">
             <button
-              className=" xl:flex md:text-lg text-gray-500 hover:text-black active:text-black cursor-pointer font-semibold"
-              onClick={() =>
-                signOut({
-                  callbackUrl: "/Signin",
-                })
-              }
+              type="button"
+              onClick={() => {
+                setIsOpen(false); // يقفل المنيو الأول
+                signOut({ callbackUrl: "/Signin" });
+              }}
+              className="xl:flex md:text-lg text-gray-500 hover:text-black active:text-black cursor-pointer font-semibold"
             >
               SignOut
             </button>
