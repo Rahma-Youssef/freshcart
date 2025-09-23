@@ -236,7 +236,7 @@ const Navbar = () => {
 
           <li className="mx-auto">
             <button
-              className="hidden xl:flex md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold"
+              className="hidden xl:flex md:text-lg text-gray-500 hover:text-black active:text-black cursor-pointer font-semibold"
               onClick={() =>
                 signOut({
                   callbackUrl: "/Signin",
