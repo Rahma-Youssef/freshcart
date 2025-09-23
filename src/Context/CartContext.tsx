@@ -1,0 +1,128 @@
+"use client";
+
+import { AddToCartAction } from "@/CartActions/AddToCart";
+import { clearCartAction } from "@/CartActions/clearCart";
+import { getUserCartAction } from "@/CartActions/getUserCart";
+import { removeCartItemAction } from "@/CartActions/removeCartItem";
+import { updateCartAction } from "@/CartActions/updateCart";
+import { Cart } from "@/Types/cart.type";
+import React, { createContext, useEffect, useState } from "react";
+
+export const CartContext = createContext({});
+
+const CartContextProvider = ({ children }: { children: React.ReactNode }) => {
+  const [numOfCartItems, setNumOfCartItems] = useState(0);
+  const [totalCartPrice, setTotalCartPrice] = useState(0);
+  const [isloading, setIsloading] = useState(false);
+  const [cartId, setCartId] = useState("");
+  const [products, setProducts] = useState([]);
+
+  async function addProductToCart(id: string) {
+    try {
+      const data = await AddToCartAction(id);
+
+      if (data.status === "success") {
+        getUserCart();
+      }
+
+      return data;
+    } catch (error) {
+      return error;
+    }
+  }
+  async function removeCartItem(id: string) {
+    try {
+      const data: Cart = await removeCartItemAction(id);
+
+      setNumOfCartItems(data.numOfCartItems);
+      setTotalCartPrice(data.data.totalCartPrice);
+      setProducts(data.data.products);
+
+      console.log(data);
+
+      return data;
+    } catch (error) {
+      return error;
+    }
+  }
+  async function updateCart(id: string, count: number) {
+    try {
+   
+      const data: Cart = await updateCartAction(id, count);
+
+      setNumOfCartItems(data.numOfCartItems);
+      setTotalCartPrice(data.data.totalCartPrice);
+      setProducts(data.data.products);
+
+      return data;
+    } catch (error) {
+
+      return error;
+    }
+  }
+  async function clearCart() {
+    try {
+      const data = await clearCartAction();
+
+      setNumOfCartItems(0);
+      setTotalCartPrice(0);
+      setProducts([]);
+
+      console.log(data);
+
+      return data;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async function getUserCart() {
+    setIsloading(true);
+    try {
+      const data: Cart = await getUserCartAction();
+
+      setNumOfCartItems(data.numOfCartItems);
+      setTotalCartPrice(data.data.totalCartPrice);
+      setProducts(data.data.products);
+      setCartId(data.cartId);
+
+      setIsloading(false);
+    } catch (error) {
+      console.log(error);
+
+      setIsloading(false);
+    }
+  }
+
+  useEffect(() => {
+    getUserCart();
+  }, []);
+
+  function afterPayment() {
+    setCartId("");
+    setNumOfCartItems(0);
+    setTotalCartPrice(0);
+    setProducts([]);
+  }
+
+  return (
+    <CartContext.Provider
+      value={{
+        isloading,
+        numOfCartItems,
+        totalCartPrice,
+        products,
+        addProductToCart,
+        removeCartItem,
+        updateCart,
+        clearCart,
+        cartId,
+        afterPayment,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
+};
+
+export default CartContextProvider;
