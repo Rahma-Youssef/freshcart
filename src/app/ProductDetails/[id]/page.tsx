@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 
 const ProductDetails = async ({ params }: { params: { id: string } }) => {
-  const { id } = await params;
+  const { id } =  params;
 
   const product: Product = await getSingleProducts(id);
   console.log(product);
