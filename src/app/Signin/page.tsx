@@ -36,7 +36,7 @@ const Signin = () => {
     const res = await signIn("credentials", {
       email: values.email,
       password: values.password,
-      redirect:true,
+      redirect:false,
       callbackUrl: "/",
     });
     setLoading(false);
