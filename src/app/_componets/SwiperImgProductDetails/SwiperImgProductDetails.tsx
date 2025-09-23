@@ -3,9 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation , Autoplay} from "swiper/modules";    
 import React from "react";
 import { Product } from "@/Types/Product.type";
-
-
-
+import Image from "next/image";
 
 
 const SwiperImgProductDetails = ({ product }: { product: Product }) => {
@@ -29,7 +27,7 @@ const SwiperImgProductDetails = ({ product }: { product: Product }) => {
         {" "}
         {product?.images.map((image, index) => (
           <SwiperSlide key={index}>
-            <img src={image} alt={product?.title} className="w-full " />
+            <Image src={image} alt={product?.title} width={200} height={200} className="w-full " />
           </SwiperSlide>
         ))}
       </Swiper>

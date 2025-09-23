@@ -207,7 +207,7 @@ const CartContextProvider = ({ children }: { children: React.ReactNode }) => {
       setCartId(data.cartId);
       setIsloading(false);
     } catch (error) {
-      console.log(error);
+
       setIsloading(false);
     }
   }
