@@ -6,7 +6,7 @@ export async  function cashPaymentAction(id: string , values: object) {
 
     if (!token) throw new Error("User not logged in");
 
-    const response = await fetch(`https://ecommerce.routemisr.com/api/v1/orders/${id}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/${id}`, {
       method: "POST",
       headers: {
         token: token as string,

@@ -37,7 +37,7 @@ const Register = () => {
   async function handleSubmit(values: RegisterSchemaType) {
     try {
       const res = await fetch(
-        "https://ecommerce.routemisr.com/api/v1/auth/signup",
+        `${process.env.NEXT_PUBLIC_API_URL}/auth/signup`,
         {
           method: "POST",
           headers: {

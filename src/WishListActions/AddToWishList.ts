@@ -2,7 +2,6 @@
 
 import { getMyToken } from "@/utilities/token";
 
-
 export async function AddToWishListAction(id: string) {
   const token = await getMyToken();
 
@@ -12,19 +11,15 @@ export async function AddToWishListAction(id: string) {
     productId: id,
   };
 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/wishlist`,
-    {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wishlist`, {
+    method: "POST",
 
-      method: "POST",
-
-      headers: {
-          "Content-Type": "application/json",
-        token: token as string,
-      },
-      body: JSON.stringify(values),
-    }
-  );
+    headers: {
+      "Content-Type": "application/json",
+      token: token as string,
+    },
+    body: JSON.stringify(values),
+  });
 
   const data = await response.json();
   return data;

@@ -7,7 +7,7 @@ export async  function onlinePaymentAction(id: string , values: object) {
 
     if (!token) throw new Error("User not logged in");
 
-    const response = await fetch(`https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${id}?url=${baseUrl}`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/orders/checkout-session/${id}?url=${baseUrl}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
