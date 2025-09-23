@@ -492,9 +492,11 @@ const Navbar = () => {
                 e.preventDefault();
                 setIsOpen(false);
 
-                
                 setTimeout(() => {
-                  signOut({ callbackUrl: "/Signin" });
+                  signOut({
+                    redirect: true,
+                    callbackUrl: "/Signin",
+                  });
                 }, 100);
               }}
               className="md:text-lg text-gray-500 hover:text-black active:text-black cursor-pointer font-semibold"
