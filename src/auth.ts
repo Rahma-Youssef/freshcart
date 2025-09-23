@@ -2,7 +2,7 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { jwtDecode } from "jwt-decode";
 
-export const authOption: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/Signin",
   },
@@ -64,4 +64,7 @@ export const authOption: NextAuthOptions = {
       return session;
     },
   },
+  
 };
+
+

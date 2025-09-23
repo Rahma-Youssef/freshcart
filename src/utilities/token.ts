@@ -19,13 +19,14 @@
 
 "use server";
 
-import { authOption } from "@/auth";
+
+import { authOptions } from "@/auth";
 // import { authOption } from "@/app/api/auth/[...nextauth]/options"; 
 import { getServerSession } from "next-auth";
 
 export async function getMyToken() {
-  const session = await getServerSession(authOption);
+  const session = await getServerSession(authOptions);
 
-  // التوكن اللي رجعناه في jwt callback
+
   return session?.token || null;
 }
