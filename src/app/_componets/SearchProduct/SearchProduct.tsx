@@ -1,5 +1,4 @@
 "use client";
-import { searchProducts } from "@/apis/searchProducts";
 import { useEffect, useState } from "react";
 import React from "react";
 import HomeProductCard from "../HomeProductCard/HomeProductCard";
@@ -33,7 +32,7 @@ const SearchProduct = () => {
     fetchProducts();
   }, []);
 
-  // handle search
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toLowerCase();
     setKeyword(value);

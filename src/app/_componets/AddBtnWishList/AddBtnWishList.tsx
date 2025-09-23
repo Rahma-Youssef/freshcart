@@ -1,5 +1,5 @@
 "use client";
-import { AddToWishListAction } from "@/WishListActions/AddToWishList";
+
 import { toast } from "sonner";
 import React, { useContext, useState } from "react";
 import { WishListContext } from "@/Context/WishListContext";

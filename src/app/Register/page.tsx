@@ -75,7 +75,7 @@ const Register = () => {
   return (
     <>
       <TitlePage title="Regiser" />
-      <div className="mx-auto px-10 md:px-0 w-full mt-12 md:w-1/2 mt-30">
+      <div className="mx-auto px-10 md:px-0 w-full md:w-1/2 mt-30">
         <h1 className="text-3xl font-semibold">Register Now:</h1>
         <div className="py-5 ">
           <Form {...form}>

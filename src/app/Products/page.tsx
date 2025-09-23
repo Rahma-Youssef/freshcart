@@ -1,8 +1,6 @@
 import React from "react";
-
 import { Product } from "@/Types/Product.type";
 import getAllProducts from "@/apis/allProducts";
-import HomeProductCard from "../_componets/HomeProductCard/HomeProductCard";
 import SearchProduct from "../_componets/SearchProduct/SearchProduct";
 
 export const metadata = {

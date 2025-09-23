@@ -1,7 +1,7 @@
 "use server";
 
 import { getMyToken } from "@/utilities/token";
-import axios from "axios";
+
 
 export async function removeCartItemAction(id: string) {
   const token = await getMyToken();

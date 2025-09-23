@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import AddBtnWishList from "../AddBtnWishList/AddBtnWishList";
-// import { getUserWishListAction } from "@/WishListActions/getUserWishlist";
 import { useAddToCart } from "../AddBtnCart/AddBtnCart";
 
 const HomeProductCard = ({ product }: { product: Product }) => {

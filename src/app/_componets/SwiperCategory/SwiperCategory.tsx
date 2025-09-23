@@ -1,9 +1,9 @@
 "use client";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import React from "react";
-import { title } from "process";
 import { Category } from "@/Types/Product.type";
+import Image from "next/image";
 
 const SwiperCategory = ({ categories }: { categories: Category[] }) => {
   return (
@@ -32,9 +32,11 @@ const SwiperCategory = ({ categories }: { categories: Category[] }) => {
         {" "}
         {categories.map((category, index) => (
           <SwiperSlide key={index}>
-            <img
+            <Image
               src={category.image}
               alt={category.name}
+              width={200}
+              height={200}
               className="  h-[200px] object-cover w-full"
             />
             <p className="text-center mt-3 font-semibold ">{category.name}</p>

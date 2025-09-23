@@ -3,7 +3,6 @@ import Image from "next/image";
 import React, { useContext, useState } from "react";
 import navbarLogo from "./../../../../public/assets/freshcart-logo.svg";
 import Link from "next/link";
-
 import { NavLink, LinksNavbar } from "../NavLink/NavLink";
 import { usePathname } from "next/navigation";
 import { Badge } from "@/components/ui/badge";

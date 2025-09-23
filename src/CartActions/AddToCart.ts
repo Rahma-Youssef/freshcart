@@ -2,7 +2,7 @@
 
 import { ProductCart } from "@/Types/cart.type";
 import { getMyToken } from "@/utilities/token";
-import axios from "axios";
+
 
 export async function AddToCartAction(id: string) {
   const token  = await getMyToken();
