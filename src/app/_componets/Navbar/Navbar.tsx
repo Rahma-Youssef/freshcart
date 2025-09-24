@@ -338,6 +338,7 @@ const Navbar = () => {
               SignOut
             </button>
           )}
+          
 
           {/* Hamburger Button for Mobile */}
           <div className="xl:hidden transition-all duration-300  ">
