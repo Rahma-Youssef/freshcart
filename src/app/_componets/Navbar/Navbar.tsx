@@ -285,14 +285,9 @@ const Navbar = () => {
   // دالة signout مضمونة
   const handleSignOut = async () => {
     await signOut({ redirect: false });
-    setIsOpen(false); 
-    window.location.href = "/Signin"; 
+    setIsOpen(false);
+    window.location.href = "/Signin";
   };
-
-
-
-
-
 
   return (
     <div className="navbar bg-white shadow-sm md:px-0 fixed top-0 left-0 right-0 z-10">
@@ -341,18 +336,18 @@ const Navbar = () => {
             {status === "authenticated" && (
               <>
                 <button
-                  className=" xl:flex me-8 md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold"
+                  className="  me-8 md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold"
                   onClick={handleSignOut}
                 >
                   SignOut
                 </button>
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="cursor-pointer text-gray-600 border-3 border-gray-600 rounded-md md:px-2 md:py-1 py-[3px] px-[6px] transition-all duration-300 hover:scale-90 hover:border-gray-950"
-              >
-                <i className="fa-solid fa-bars md:text-md text-[15px] hover:text-black"></i>
-              </button>
-               
+
+                <button
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="cursor-pointer text-gray-600 border-3 border-gray-600 rounded-md md:px-2 md:py-1 py-[3px] px-[6px] transition-all duration-300 hover:scale-90 hover:border-gray-950"
+                >
+                  <i className="fa-solid fa-bars md:text-md text-[15px] hover:text-black"></i>
+                </button>
               </>
             )}
           </div>
@@ -411,8 +406,7 @@ const Navbar = () => {
 
                 <div>
                   <p className="hidden xl:flex bg-amber-300 text-[14px] p-2 rounded-md font-semibold gap-1">
-                    <span>Welcome,</span>{" "}
-                    {session?.user?.name.split(" ")[0]}
+                    <span>Welcome,</span> {session?.user?.name.split(" ")[0]}
                   </p>
                 </div>
               </div>
@@ -436,7 +430,11 @@ const Navbar = () => {
         className={`
           absolute top-16 left-0 w-full bg-white shadow-lg p-4 xl:hidden z-50
           transition-all duration-500 ease-in-out
-          ${isOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10 pointer-events-none"}
+          ${
+            isOpen
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 -translate-y-10 pointer-events-none"
+          }
         `}
       >
         <ul className="flex flex-col gap-4">
@@ -484,4 +482,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
