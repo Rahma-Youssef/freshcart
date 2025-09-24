@@ -336,12 +336,12 @@ const Navbar = () => {
             {status === "authenticated" && (
               <>
                 <button
-                  className="  me-8 md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold"
+                  className=" xl:flex me-8 md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold"
                   onClick={handleSignOut}
                 >
                   SignOut
                 </button>
-
+                
                 <button
                   onClick={() => setIsOpen(!isOpen)}
                   className="cursor-pointer text-gray-600 border-3 border-gray-600 rounded-md md:px-2 md:py-1 py-[3px] px-[6px] transition-all duration-300 hover:scale-90 hover:border-gray-950"
