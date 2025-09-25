@@ -79,29 +79,25 @@ const Navbar = () => {
           </div>
 
           {/* Hamburger Button for Mobile */}
-          <div className="xl:hidden flex items-center gap-4 transition-all duration-300">
-            {status === "authenticated" && (
-              <> 
-              
-                 <div>
+
+          {status === "authenticated" && (
+            <>
+              <div className="xl:hidden flex items-center gap-4  transition-all duration-300">
+                <div>
                   <p className=" xl:flex bg-amber-300 md:text-[14px] text-[10px] md:p-2 py-[5px] px-[10px] rounded-md font-semibold gap-1">
                     <span>Welcome,</span> {session?.user?.name.split(" ")[0]}
                   </p>
                 </div>
 
-                 <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="cursor-pointer text-gray-600 border-3 border-gray-600 rounded-md md:px-2 md:py-1 py-[3px] px-[6px] transition-all duration-300 hover:scale-90 hover:border-gray-950"
-              >
-                <i className="fa-solid fa-bars md:text-md text-[15px] hover:text-black active:text-black"></i>
-              </button>
-
-              
-              </>
-            
-              
-            )}
-          </div>
+                <button
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="cursor-pointer text-gray-600 border-3 border-gray-600 rounded-md md:px-2 md:py-1 py-[3px] px-[6px] transition-all duration-300 hover:scale-90 hover:border-gray-950"
+                >
+                  <i className="fa-solid fa-bars md:text-md text-[15px] hover:text-black active:text-black"></i>
+                </button>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Right Section */}
@@ -160,7 +156,7 @@ const Navbar = () => {
                 </div>
               </>
             )}
-          
+
             {status === "unauthenticated" && (
               <>
                 <button className="md:text-lg text-gray-500 hover:text-black active:text-black cursor-pointer font-semibold">
