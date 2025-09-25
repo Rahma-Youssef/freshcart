@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Autoplay, Pagination } from "swiper/modules";
 import { SwiperSlide } from "swiper/react";
-
 import banner1 from "../../../../public/assets/slider/banner1.webp";
 import banner2 from "../../../../public/assets/slider/grocery-banner-2.webp";
 import slider1 from "../../../../public/assets/slider/slider-image-1.webp";
@@ -14,8 +13,7 @@ import slider3 from "../../../../public/assets/slider/slider-image-3.webp";
 import "swiper/css";
 import "swiper/css/pagination";
 
-
-const Swiper = dynamic(() => import("swiper/react").then(mod => mod.Swiper), {
+const Swiper = dynamic(() => import("swiper/react").then((mod) => mod.Swiper), {
   ssr: false,
 });
 
@@ -30,7 +28,7 @@ const MainSlider = () => {
           modules={[Autoplay, Pagination]}
           spaceBetween={0}
           slidesPerView={1}
-          loop={slides.length > 1} 
+          loop={slides.length > 1}
           pagination={{ clickable: true }}
           autoplay={{
             delay: 3000,
@@ -44,8 +42,9 @@ const MainSlider = () => {
                 <Image
                   src={img}
                   alt={`slider ${index + 1}`}
-                  fill 
+                  fill
                   priority={index === 0}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 66vw"
                   className="h-[250px] md:h-[400px] w-full md:object-cover "
                 />
               </div>
@@ -61,7 +60,7 @@ const MainSlider = () => {
             src={banner1}
             alt="Banner 1"
             fill
- 
+            sizes="(max-width: 768px) 100vw, 33vw"
             className="object-cover "
           />
         </div>
@@ -70,8 +69,8 @@ const MainSlider = () => {
             src={banner2}
             alt="Banner 2"
             fill
-        
-            className="object-cover  "
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover "
           />
         </div>
       </div>

@@ -42,6 +42,7 @@ const Brands = async () => {
                     alt={brand.name}
                     width={300}
                     height={300}
+                    priority
                   />
                   <p>{brand.name} </p>
                 </Button>

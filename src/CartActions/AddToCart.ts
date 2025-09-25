@@ -16,6 +16,7 @@ export async function AddToCartAction(id: string) {
   const response  = await fetch(
   `${process.env.NEXT_PUBLIC_API_URL}/cart`,
     {
+      cache: "force-cache",
       method: "POST",
       headers: {
          "Content-Type": "application/json",

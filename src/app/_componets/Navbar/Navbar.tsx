@@ -85,7 +85,7 @@ const Navbar = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 className="cursor-pointer text-gray-600 border-3 border-gray-600 rounded-md md:px-2 md:py-1 py-[3px] px-[6px] transition-all duration-300 hover:scale-90 hover:border-gray-950"
               >
-                <i className="fa-solid fa-bars md:text-md text-[15px] hover:text-black"></i>
+                <i className="fa-solid fa-bars md:text-md text-[15px] hover:text-black active:text-black"></i>
               </button>
             )}
           </div>
@@ -120,7 +120,7 @@ const Navbar = () => {
             {status === "authenticated" && (
               <Link href="/Cart">
                 <button className="cursor-pointer">
-                  <i className="fa-solid fa-cart-shopping text-2xl text-gray-600 hover:text-black transition-all duration-300 relative">
+                  <i className="fa-solid fa-cart-shopping text-2xl text-gray-600 hover:text-black active:text-black transition-all duration-300 relative">
                     <Badge className="absolute -top-4 left-4 bg-[#4FA74F]">
                       <div className="text-[14px]">{numOfCartItems}</div>
                     </Badge>
@@ -134,7 +134,7 @@ const Navbar = () => {
             {status === "authenticated" && (
               <>
                 <button
-                  className="hidden xl:flex md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold"
+                  className="hidden xl:flex md:text-lg text-gray-500 hover:text-black active:text-black cursor-pointer font-semibold"
                   onClick={handleSignOut}
                 >
                   SignOut
@@ -149,10 +149,10 @@ const Navbar = () => {
             )}
             {status === "unauthenticated" && (
               <>
-                <button className="md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold">
+                <button className="md:text-lg text-gray-500 hover:text-black active:text-black cursor-pointer font-semibold">
                   <Link href="/Register">Register</Link>
                 </button>
-                <button className="md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold">
+                <button className="md:text-lg text-gray-500 hover:text-black active:text-black cursor-pointer font-semibold">
                   <Link href="/Signin">Signin</Link>
                 </button>
               </>
@@ -165,7 +165,7 @@ const Navbar = () => {
       <div
         className={`
           absolute top-16 left-0 bg-white shadow-lg p-4 xl:hidden z-50
-          transition-all duration-500 ease-in-out w-full
+          transition-all duration-500 ease-in-out w-full 
           ${
             isOpen
               ? "opacity-100 translate-y-0"
@@ -215,7 +215,7 @@ const Navbar = () => {
                   className="cursor-pointer"
                   onClick={() => setIsOpen(false)}
                 >
-                  <i className="fa-solid fa-cart-shopping text-2xl text-gray-600 hover:text-black transition-all duration-300 relative">
+                  <i className="fa-solid fa-cart-shopping text-2xl text-gray-600 hover:text-black active:text-black transition-all duration-300 relative">
                     <Badge className="absolute -top-4 left-4 bg-[#4FA74F]">
                       <div className="text-[14px]">{numOfCartItems}</div>
                     </Badge>

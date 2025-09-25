@@ -1,10 +1,15 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
+import {  SwiperSlide } from "swiper/react";
 import { Navigation , Autoplay} from "swiper/modules";    
 import React from "react";
 import { Product } from "@/Types/Product.type";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 
+
+const Swiper = dynamic(() => import("swiper/react").then(mod => mod.Swiper), {
+  ssr: false,
+});
 
 const SwiperImgProductDetails = ({ product }: { product: Product }) => {
   return (

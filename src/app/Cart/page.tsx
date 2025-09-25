@@ -117,15 +117,15 @@ const Cart = () => {
             {safeProducts.map((product: ProductCart, index: number) => (
               <div
                 key={product._id ?? index}
-                className="flex  flex-col md:flex-row  justify-between items-center gap-10 border-b border-gray-300/70 py-5"
+                className="flex  flex-col md:flex-row  justify-between items-center gap-10 border-b border-gray-300/70 py-5  "
               >
-                <div className="flex items-center gap-5">
+                <div className="md:flex items-center gap-5 grid grid-cols-2" >
                   <Image
                     src={product.product.imageCover}
                     alt={product.product.title}
                     width={200}
                     height={200}
-                    className="md:w-[200px] md:h-[200px] w-[100px] h-[100px]   object-cover"
+                    className="w-[200px] h-[200px]   object-cover"
                   />
 
                   <div>
