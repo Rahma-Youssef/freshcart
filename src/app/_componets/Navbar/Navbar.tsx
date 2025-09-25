@@ -35,7 +35,7 @@
 //   ];
 
 //   return (
-//     <div className="navbar bg-white shadow-sm md:px-0  fixed  top-0 left-0 right-0 z-10">
+//     <div className="navbar bg-white shadow-sm md:px-0  fixed  top-0 left-0 right-0 z-10 ">
 //       <div className="flex w-[90%] mx-auto  md:px-4 ">
 //         {/* Left Section */}
 //         <div className=" flex items-center justify-between w-[90%] mx-auto">
@@ -178,8 +178,8 @@
 
 //       <div
 //         className={`
-//     absolute top-16 left-0 w-full bg-white shadow-lg p-4 xl:hidden z-50
-//     transition-all duration-500 ease-in-out
+//     absolute top-16 left-0  bg-white shadow-lg p-4 xl:hidden z-50
+//     transition-all duration-500 ease-in-out w-[90%]
 //     ${
 //       isOpen
 //         ? "opacity-100 translate-y-0"
@@ -282,16 +282,14 @@ const Navbar = () => {
     { name: "Brands", href: "/Brands" },
   ];
 
-  // دالة signout مضمونة
   const handleSignOut = async () => {
-    await signOut({ redirect: false });
     setIsOpen(false);
-    window.location.href = "/Signin";
+    await signOut({ callbackUrl: "/Signin" });
   };
 
   return (
     <div className="navbar bg-white shadow-sm md:px-0 fixed top-0 left-0 right-0 z-10">
-      <div className="flex w-[90%] mx-auto md:px-4 ">
+      <div className="flex w-[90%] mx-auto md:px-4">
         {/* Left Section */}
         <div className="flex items-center justify-between w-[90%] mx-auto">
           {/* Logo */}
@@ -310,38 +308,35 @@ const Navbar = () => {
 
             <div className="hidden xl:flex">
               <ul className="menu-horizontal ms-5 px-1 flex-row xl:gap-4 md:gap-2">
-                {status === "authenticated" &&
-                  path.map((link, index) => (
-                    <li key={index}>
-                      <LinksNavbar
-                        href={link.href}
-                        linkname={link.name}
-                        pathname={pathname}
-                      />
-                    </li>
-                  ))}
+                {status === "authenticated" && (
+                  <>
+                    {path.map((link, index) => (
+                      <li key={index}>
+                        <LinksNavbar
+                          href={link.href}
+                          linkname={link.name}
+                          pathname={pathname}
+                        />
+                      </li>
+                    ))}
+                  </>
+                )}
 
-                {status === "loading" &&
-                  path.map((_, index) => (
-                    <li key={index}>
-                      <Skeleton className="h-[30px] w-[40px] rounded-md bg-gray-300" />
-                    </li>
-                  ))}
+                {status === "loading" && (
+                  <>
+                    {path.map((link, index) => (
+                      <li key={index}>
+                        <Skeleton className="h-[30px] w-[40px] rounded-md bg-gray-300" />
+                      </li>
+                    ))}
+                  </>
+                )}
               </ul>
             </div>
           </div>
-          {status === "authenticated" && (
-            <button
-              className=" xl:flex me-8 md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold"
-              onClick={handleSignOut}
-            >
-              SignOut
-            </button>
-          )}
-          
 
           {/* Hamburger Button for Mobile */}
-          <div className="xl:hidden transition-all duration-300  ">
+          <div className="xl:hidden transition-all duration-300">
             {status === "authenticated" && (
               <button
                 onClick={() => setIsOpen(!isOpen)}
@@ -356,10 +351,9 @@ const Navbar = () => {
         {/* Right Section */}
         <div className="xl:flex items-center gap-3">
           <div className="hidden xl:flex items-center gap-3">
-            {/* Social Icons */}
-            <ul className="flex items-center gap-2 ">
+            <ul className="flex items-center gap-2">
               <li>
-                <i className="fa-brands fa-instagram cursor-pointer fa-lg "></i>
+                <i className="fa-brands fa-instagram cursor-pointer fa-lg"></i>
               </li>
               <li>
                 <i className="fa-brands fa-facebook cursor-pointer fa-lg"></i>
@@ -379,7 +373,6 @@ const Navbar = () => {
             </ul>
           </div>
 
-          {/* Cart & Auth */}
           <div className="hidden xl:flex mt-2">
             {status === "authenticated" && (
               <Link href="/Cart">
@@ -396,9 +389,18 @@ const Navbar = () => {
 
           <div className="flex items-center md:gap-5 gap-2 ms-3">
             {status === "authenticated" && (
-              <div className="flex items-center gap-5">
+              <>
+                {/* زر تسجيل الخروج للشاشات الكبيرة */}
                 <button
                   className="hidden xl:flex md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold"
+                  onClick={handleSignOut}
+                >
+                  SignOut
+                </button>
+
+                {/* زر تسجيل الخروج للشاشات الصغيرة - ظاهر فقط في الموبايل */}
+                <button
+                  className="xl:hidden md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold"
                   onClick={handleSignOut}
                 >
                   SignOut
@@ -409,7 +411,7 @@ const Navbar = () => {
                     <span>Welcome,</span> {session?.user?.name.split(" ")[0]}
                   </p>
                 </div>
-              </div>
+              </>
             )}
             {status === "unauthenticated" && (
               <>
@@ -417,7 +419,7 @@ const Navbar = () => {
                   <Link href="/Register">Register</Link>
                 </button>
                 <button className="md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold">
-                  <Link href="/Signin"> Signin</Link>
+                  <Link href="/Signin">Signin</Link>
                 </button>
               </>
             )}
@@ -428,8 +430,8 @@ const Navbar = () => {
       {/* Mobile Dropdown Menu */}
       <div
         className={`
-          absolute top-16 left-0 w-full bg-white shadow-lg p-4 xl:hidden z-50
-          transition-all duration-500 ease-in-out
+          absolute top-16 left-0 bg-white shadow-lg p-4 xl:hidden z-50
+          transition-all duration-500 ease-in-out w-[90%]
           ${
             isOpen
               ? "opacity-100 translate-y-0"
@@ -449,12 +451,34 @@ const Navbar = () => {
             </li>
           ))}
 
-          {/* Cart in Mobile */}
+          <div className="mx-auto py-3">
+            <ul className="flex items-center gap-2">
+              <li>
+                <i className="fa-brands fa-instagram cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-facebook cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-tiktok cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-twitter cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-linkedin cursor-pointer fa-lg"></i>
+              </li>
+              <li>
+                <i className="fa-brands fa-youtube cursor-pointer fa-lg"></i>
+              </li>
+            </ul>
+          </div>
+
           <li className="mx-auto">
             <Link href="/Cart">
-              <button
+              <button 
                 className="cursor-pointer"
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={() => setIsOpen(false)}
               >
                 <i className="fa-solid fa-cart-shopping text-2xl text-gray-600 hover:text-black transition-all duration-300 relative">
                   <Badge className="absolute -top-4 left-4 bg-[#4FA74F]">
@@ -465,14 +489,13 @@ const Navbar = () => {
             </Link>
           </li>
 
-          {/* SignOut in Mobile */}
           <li className="mx-auto">
             <button
               type="button"
               onClick={handleSignOut}
-              className="md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold"
+              className="w-full py-2 text-center md:text-lg text-gray-500 hover:text-black active:text-black cursor-pointer font-semibold border-t border-gray-200 mt-2"
             >
-              SignOut
+              Sign Out
             </button>
           </li>
         </ul>
