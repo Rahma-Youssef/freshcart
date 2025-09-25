@@ -57,10 +57,10 @@ const HomeProductCard = ({ product }: { product: Product }) => {
           disabled={loading}
           onClick={() => handleAddToCart(product.id)}
           className="border-0 bg-[#64a164] cursor-pointer w-[90%] mx-auto rounded-md mt-3 
-                     translate-y-8 opacity-0
-                      group-hover:-translate-y-3 group-hover:opacity-100
-                     active:-translate-y-3 active:opacity-100
-                     focus:-translate-y-3 focus:opacity-100
+                     md:translate-y-8 md:opacity-0
+                      md:group-hover:-translate-y-3 md:group-hover:opacity-100
+                     -translate-y-3 opacity-100
+                    
                      transition-all duration-500"
         >
           {loading ? "Adding..." : "Add to Cart"}

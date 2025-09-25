@@ -49,7 +49,7 @@ const AddBtnWishList = ({ id }: { id: string }) => {
             addProductToWishList(id);
           }
         }}
-        className={`fa-regular fa-heart fa-xl cursor-pointer hover:scale-90 transition-all duration-100 ${
+        className={`fa-regular fa-heart fa-xl cursor-pointer active:scale-90 hover:scale-90 transition-all duration-100 ${
           inWishlist ? " fa-solid fa-heart text-red-500 " : "text-black"
         }`}
       ></i>
