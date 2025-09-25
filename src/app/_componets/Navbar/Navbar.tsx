@@ -133,7 +133,6 @@ const Navbar = () => {
           <div className="flex items-center md:gap-5 gap-2 ms-3">
             {status === "authenticated" && (
               <>
-                {/* زر تسجيل الخروج للشاشات الكبيرة */}
                 <button
                   className="hidden xl:flex md:text-lg text-gray-500 hover:text-black cursor-pointer font-semibold"
                   onClick={handleSignOut}
@@ -166,7 +165,7 @@ const Navbar = () => {
       <div
         className={`
           absolute top-16 left-0 bg-white shadow-lg p-4 xl:hidden z-50
-          transition-all duration-500 ease-in-out w-[90%]
+          transition-all duration-500 ease-in-out w-full
           ${
             isOpen
               ? "opacity-100 translate-y-0"
@@ -174,66 +173,68 @@ const Navbar = () => {
           }
         `}
       >
-        <ul className="flex flex-col gap-4">
-          {path.map((item, index) => (
-            <li key={index}>
-              <NavLink
-                hrefPath={item.href}
-                setIsOpen={setIsOpen}
-                name={item.name}
-                pathname={pathname}
-              />
+        <div className="w-[90%] mx-auto">
+          <ul className="flex flex-col gap-4">
+            {path.map((item, index) => (
+              <li key={index}>
+                <NavLink
+                  hrefPath={item.href}
+                  setIsOpen={setIsOpen}
+                  name={item.name}
+                  pathname={pathname}
+                />
+              </li>
+            ))}
+
+            <div className="mx-auto py-3">
+              <ul className="flex items-center gap-2">
+                <li>
+                  <i className="fa-brands fa-instagram cursor-pointer fa-lg"></i>
+                </li>
+                <li>
+                  <i className="fa-brands fa-facebook cursor-pointer fa-lg"></i>
+                </li>
+                <li>
+                  <i className="fa-brands fa-tiktok cursor-pointer fa-lg"></i>
+                </li>
+                <li>
+                  <i className="fa-brands fa-twitter cursor-pointer fa-lg"></i>
+                </li>
+                <li>
+                  <i className="fa-brands fa-linkedin cursor-pointer fa-lg"></i>
+                </li>
+                <li>
+                  <i className="fa-brands fa-youtube cursor-pointer fa-lg"></i>
+                </li>
+              </ul>
+            </div>
+
+            <li className="mx-auto">
+              <Link href="/Cart">
+                <button
+                  className="cursor-pointer"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <i className="fa-solid fa-cart-shopping text-2xl text-gray-600 hover:text-black transition-all duration-300 relative">
+                    <Badge className="absolute -top-4 left-4 bg-[#4FA74F]">
+                      <div className="text-[14px]">{numOfCartItems}</div>
+                    </Badge>
+                  </i>
+                </button>
+              </Link>
             </li>
-          ))}
 
-          <div className="mx-auto py-3">
-            <ul className="flex items-center gap-2">
-              <li>
-                <i className="fa-brands fa-instagram cursor-pointer fa-lg"></i>
-              </li>
-              <li>
-                <i className="fa-brands fa-facebook cursor-pointer fa-lg"></i>
-              </li>
-              <li>
-                <i className="fa-brands fa-tiktok cursor-pointer fa-lg"></i>
-              </li>
-              <li>
-                <i className="fa-brands fa-twitter cursor-pointer fa-lg"></i>
-              </li>
-              <li>
-                <i className="fa-brands fa-linkedin cursor-pointer fa-lg"></i>
-              </li>
-              <li>
-                <i className="fa-brands fa-youtube cursor-pointer fa-lg"></i>
-              </li>
-            </ul>
-          </div>
-
-          <li className="mx-auto">
-            <Link href="/Cart">
-              <button 
-                className="cursor-pointer"
-                onClick={() => setIsOpen(false)}
+            <li className="mx-auto">
+              <button
+                type="button"
+                onClick={handleSignOut}
+                className="w-full py-2 text-center md:text-lg text-gray-500 hover:text-black active:text-black cursor-pointer font-semibold border-t border-gray-200 mt-2"
               >
-                <i className="fa-solid fa-cart-shopping text-2xl text-gray-600 hover:text-black transition-all duration-300 relative">
-                  <Badge className="absolute -top-4 left-4 bg-[#4FA74F]">
-                    <div className="text-[14px]">{numOfCartItems}</div>
-                  </Badge>
-                </i>
+                Sign Out
               </button>
-            </Link>
-          </li>
-
-          <li className="mx-auto">
-            <button
-              type="button"
-              onClick={handleSignOut}
-              className="w-full py-2 text-center md:text-lg text-gray-500 hover:text-black active:text-black cursor-pointer font-semibold border-t border-gray-200 mt-2"
-            >
-              Sign Out
-            </button>
-          </li>
-        </ul>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );

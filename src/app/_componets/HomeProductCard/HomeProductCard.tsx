@@ -38,7 +38,9 @@ const HomeProductCard = ({ product }: { product: Product }) => {
           <h2 className="card-title line-clamp-1 text-[17px]">
             {product.title}
           </h2>
-          <div className="flex justify-between items-center w-full">
+          <div className="flex justify-between items-center w-full" onClick={(e)=>{
+ 
+            e.stopPropagation()}}>
             <span className="font-semibold">
               {product.price} <span className="font-normal">EGP</span>
             </span>
