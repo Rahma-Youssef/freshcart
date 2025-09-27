@@ -1,4 +1,4 @@
-
+"use client";
 import { WishList } from "@/Types/wishList.type";
 import { AddToWishListAction } from "@/WishListActions/AddToWishList";
 import { getUserWishListAction } from "@/WishListActions/getUserWishlist";
@@ -16,13 +16,12 @@ const WishListContextProvider = ({
   const [isloading, setIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
 
- 
   async function addProductToWishList(id: string) {
     try {
       const data: WishList = await AddToWishListAction(id);
-   
-       if (data.status === "success") {
-        await getUserWishList(); 
+
+      if (data.status === "success") {
+        await getUserWishList();
       }
       return data;
     } catch (error) {
@@ -30,20 +29,19 @@ const WishListContextProvider = ({
     }
   }
 
-async function removeWishListItem(id: string) {
-  try {
-    const data = await removeWishlistItemAction(id);
+  async function removeWishListItem(id: string) {
+    try {
+      const data = await removeWishlistItemAction(id);
 
- 
-     if (data.status === "success") {
-        await getUserWishList(); 
+      if (data.status === "success") {
+        setProducts((prev) => prev.filter((p) => p._id !== id));
       }
 
-    return data;
-  } catch (error) {
-    console.log(error);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   }
-}
 
   async function getUserWishList() {
     setIsLoading(true);

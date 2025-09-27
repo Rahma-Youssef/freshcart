@@ -24,7 +24,7 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
 
   const product: Product = await getSingleProducts(id);
-  console.log(product);
+
 
   return (
     <div className="w-full px-5 md:w-[80%] mx-auto  md:px-0 my-10  flex flex-wrap  items-center mt-20">

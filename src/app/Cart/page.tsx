@@ -52,8 +52,6 @@ const Cart = () => {
     }
   }
 
-
-
   async function removeItem(id: string) {
     setRemovingId(id); // start loading for this product
     try {
@@ -79,7 +77,7 @@ const Cart = () => {
         position: "top-center",
       });
     } finally {
-      setRemovingId(null); 
+      setRemovingId(null);
     }
   }
 
@@ -149,16 +147,15 @@ const Cart = () => {
                     </p>
 
                     <button
-                      className="flex items-center gap-2 text-red-600 cursor-pointer text-sm md:text-lg"
+                      className="text-sm md:text-lg flex items-center gap-2 text-red-600 hover:text-red-800 transition cursor-pointer"
                       onClick={() => removeItem(product.product.id)}
                       disabled={removingId === product.product.id}
                     >
-                      {removingId === product.product.id ? (
-                        <p >Loading...</p>
+                      {removingId === product.product._id ? (
+                        "Removing..."
                       ) : (
                         <>
-                          <i className="fa-solid fa-trash-can"></i>
-                          Remove
+                          <i className="fa-solid fa-trash-can"></i> Remove
                         </>
                       )}
                     </button>

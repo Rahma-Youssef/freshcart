@@ -4,13 +4,12 @@ import { toast } from "sonner";
 import React, { useContext, useState } from "react";
 import { WishListContext } from "@/Context/WishListContext";
 
+
 const AddBtnWishList = ({ id }: { id: string }) => {
   const { products, addProductToWishList, removeWishListItem, setIsLoading } =
     useContext(WishListContext);
 
-  const inWishlist = products.some((item) => item._id === id);
-
-  // const inWishlist = isInWishList(id);
+  const inWishlist = products.some((item:object) => item._id === id);
 
   async function handleToggleWishList() {
     setIsLoading(true);
@@ -29,8 +28,10 @@ const AddBtnWishList = ({ id }: { id: string }) => {
         });
       }
     } catch (error) {
-
-      toast.error("Something went wrong", { duration: 3000, position: "top-center" });
+      toast.error("Something went wrong", {
+        duration: 3000,
+        position: "top-center",
+      });
     } finally {
       setIsLoading(false);
     }
