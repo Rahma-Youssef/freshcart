@@ -4,15 +4,13 @@ import React from "react";
 import { Product } from "@/Types/Product.type";
 import { Metadata } from "next";
 import AddbtncartProDetais from "../../_componets/AddbtncartProDetais/AddbtncartProDetais";
-
-
+import AddBtnWishList from "@/app/_componets/AddBtnWishList/AddBtnWishList";
 
 interface Props {
   params: {
     id: string;
   };
 }
-
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product: Product = await getSingleProducts(params.id);
@@ -22,9 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-
 const ProductDetails = async ({ params }: { params: { id: string } }) => {
-  const { id } =  params;
+  const { id } = params;
 
   const product: Product = await getSingleProducts(id);
   console.log(product);
@@ -37,7 +34,11 @@ const ProductDetails = async ({ params }: { params: { id: string } }) => {
       </div>
       {/* ProductContent */}
       <div className="w-full md:w-2/3  p-5 md:m-0 ">
-        <h1 className=" font-bold  ">{product.title}</h1>
+        <div className="flex justify-between items-center">
+          {" "}
+          <h1 className=" font-bold  ">{product.title}</h1>
+          <AddBtnWishList id={product.id} />
+        </div>
         <p className="py-5 text-xs text-gray-600">{product.description}</p>
         <p>{product.category.name}</p>
         <div className="flex justify-between items-center w-full my-5">

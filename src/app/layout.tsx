@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "FreshCart",
-  description: "E-commerce for all thinga clothes , bags and food",
+  description: "E-commerce for all things clothes and bags , food",
   icons: {
     icon: "./../app/favicon.ico", // أو favicon.svg
   },

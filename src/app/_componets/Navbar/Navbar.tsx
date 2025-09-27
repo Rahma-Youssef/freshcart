@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import navbarLogo from "./../../../../public/assets/freshcart-logo.svg";
 import Link from "next/link";
 import { NavLink, LinksNavbar } from "../NavLink/NavLink";
@@ -14,7 +14,18 @@ const Navbar = () => {
   const { data: session, status } = useSession();
   const { numOfCartItems } = useContext(CartContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFadeOut(true);
+      setTimeout(() => setShowWelcome(false), 500);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const path = [
     { name: "Home", href: "/" },
@@ -83,11 +94,14 @@ const Navbar = () => {
           {status === "authenticated" && (
             <>
               <div className="xl:hidden flex items-center gap-4  transition-all duration-300">
-                <div>
-                  <p className=" xl:flex bg-amber-300 md:text-[14px] text-[10px] md:p-2 py-[5px] px-[10px] rounded-md font-semibold gap-1">
-                    <span>Welcome,</span> {session?.user?.name.split(" ")[0]}
-                  </p>
-                </div>
+                {showWelcome && (
+                  <div>
+                    <p className={ `xl:flex bg-amber-300 md:text-[14px] text-[10px] md:p-2 py-[5px] px-[10px] rounded-md font-semibold gap-1 transition-opacity duration-500
+                    ${fadeOut ? "opacity-0" : "opacity-100"}`}>
+                      <span>Welcome,</span> {session?.user?.name.split(" ")[0]}
+                    </p>
+                  </div>
+                )}
 
                 <button
                   onClick={() => setIsOpen(!isOpen)}
@@ -149,11 +163,17 @@ const Navbar = () => {
                   SignOut
                 </button>
 
-                <div>
-                  <p className="hidden xl:flex bg-amber-300 text-[14px] p-2 rounded-md font-semibold gap-1">
-                    <span>Welcome,</span> {session?.user?.name.split(" ")[0]}
-                  </p>
-                </div>
+                {showWelcome && (
+                  <div>
+                    <p
+                      className={`xl:flex hidden bg-amber-300 md:text-[14px] text-[10px] md:p-2 py-[5px] px-[10px] rounded-md font-semibold gap-1 transition-opacity duration-500 ${
+                        fadeOut ? "opacity-0" : "opacity-100"
+                      }`}
+                    >
+                      <span>Welcome,</span> {session?.user?.name.split(" ")[0]}
+                    </p>
+                  </div>
+                )}
               </>
             )}
 
