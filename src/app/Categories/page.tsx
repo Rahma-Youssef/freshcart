@@ -10,10 +10,6 @@ export const metadata = {
 
 const Categories = async() => {
 
-  const token =  await getMyToken();
-  console.log(token);
-  
-
   return (
     <div>
       <CategoriesComp></CategoriesComp>

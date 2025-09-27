@@ -12,18 +12,14 @@ import Link from "next/link";
 import TitlePage from "../_componets/TitlePage/TitlePage";
 
 const Cart = () => {
-
   const [updatingAction, setUpdatingAction] = useState<string | null>(null);
-
+  const [removingId, setRemovingId] = useState<string | null>(null);
 
   const cartCtx = useContext(CartContext);
 
-
   if (!cartCtx) {
-
     return null;
   }
-
 
   const {
     isloading,
@@ -35,8 +31,11 @@ const Cart = () => {
     clearCart,
   } = cartCtx;
 
- 
-  async function handleUpdate(id: string, count: number, type: "plus" | "minus") {
+  async function handleUpdate(
+    id: string,
+    count: number,
+    type: "plus" | "minus"
+  ) {
     setUpdatingAction(`${type}-${id}`);
     try {
       if (typeof updateCart === "function") {
@@ -44,17 +43,23 @@ const Cart = () => {
       }
     } catch (err) {
       console.error(err);
-      toast.error("Failed to update product", { position: "top-center", duration: 3000 });
+      toast.error("Failed to update product", {
+        position: "top-center",
+        duration: 3000,
+      });
     } finally {
       setUpdatingAction(null);
     }
   }
 
+
+
   async function removeItem(id: string) {
+    setRemovingId(id); // start loading for this product
     try {
-      if (typeof removeCartItem !== "function") throw new Error("removeCartItem not available");
+      if (typeof removeCartItem !== "function")
+        throw new Error("removeCartItem not available");
       const data = await removeCartItem(id);
-      console.log(data);
 
       if (data?.status === "success") {
         toast.success("success remove product", {
@@ -69,14 +74,18 @@ const Cart = () => {
       }
     } catch (error) {
       console.error(error);
-      toast.error("Something went wrong", { duration: 3000, position: "top-center" });
+      toast.error("Something went wrong", {
+        duration: 3000,
+        position: "top-center",
+      });
+    } finally {
+      setRemovingId(null); 
     }
   }
 
   if (isloading) {
     return <Loading />;
   }
-
 
   const safeProducts: ProductCart[] = products ?? [];
 
@@ -119,7 +128,7 @@ const Cart = () => {
                 key={product._id ?? index}
                 className="flex  flex-col md:flex-row  justify-between items-center gap-10 border-b border-gray-300/70 py-5  "
               >
-                <div className="md:flex items-center gap-5 grid grid-cols-2" >
+                <div className="md:flex items-center gap-5 grid grid-cols-2">
                   <Image
                     src={product.product.imageCover}
                     alt={product.product.title}
@@ -138,11 +147,20 @@ const Cart = () => {
                         {product.price} EGP{" "}
                       </span>{" "}
                     </p>
+
                     <button
                       className="flex items-center gap-2 text-red-600 cursor-pointer text-sm md:text-lg"
                       onClick={() => removeItem(product.product.id)}
+                      disabled={removingId === product.product.id}
                     >
-                      <i className="fa-solid fa-trash-can "></i> Remove
+                      {removingId === product.product.id ? (
+                        <p >Loading...</p>
+                      ) : (
+                        <>
+                          <i className="fa-solid fa-trash-can"></i>
+                          Remove
+                        </>
+                      )}
                     </button>
                   </div>
                 </div>
@@ -150,22 +168,39 @@ const Cart = () => {
                 <div className="flex items-center gap-3">
                   <Button
                     onClick={() =>
-                      handleUpdate(product.product.id, product.count + 1, "plus")
+                      handleUpdate(
+                        product.product.id,
+                        product.count + 1,
+                        "plus"
+                      )
                     }
                     disabled={updatingAction === `plus-${product.product.id}`}
                     className="  text-lg flex items-center justify-center  border-2 border-[#08AC0Aff] bg-transparent hover:bg-[#08AC0Aff] hover:border-white transition-all duration-200    hover:cursor-pointer hover:text-white text-black"
                   >
-                    {updatingAction === `plus-${product.product.id}` ? <i className="fa-solid fa-spinner text-[10px] fa-spin-pulse"></i>: "+"}
+                    {updatingAction === `plus-${product.product.id}` ? (
+                      <i className="fa-solid fa-spinner text-[10px] fa-spin-pulse"></i>
+                    ) : (
+                      "+"
+                    )}
                   </Button>
                   <p>{product.count}</p>
+
                   <Button
                     onClick={() =>
-                      handleUpdate(product.product.id, product.count - 1, "minus")
+                      handleUpdate(
+                        product.product.id,
+                        product.count - 1,
+                        "minus"
+                      )
                     }
                     disabled={updatingAction === `minus-${product.product.id}`}
                     className=" text-lg border-2 border-[#08AC0Aff] bg-transparent hover:bg-[#08AC0Aff] hover:border-white transition-all duration-200    hover:cursor-pointer hover:text-white text-black"
                   >
-                    {updatingAction === `minus-${product.product.id}` ?  <i className="fa-solid fa-spinner text-[10px] fa-spin-pulse"></i> : "-"}
+                    {updatingAction === `minus-${product.product.id}` ? (
+                      <i className="fa-solid fa-spinner text-[10px] fa-spin-pulse"></i>
+                    ) : (
+                      "-"
+                    )}
                   </Button>
                 </div>
               </div>
